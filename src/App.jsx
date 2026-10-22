@@ -2,15 +2,28 @@ import { useState, useEffect } from "react"
 import "./App.css"
 
 export default function App(){
-  const [name,setName]=useState("")
-  const [email,setEmail] = useState("")
-  const [username, setUsername] = useState("");
+const [name,setName]=useState("")
+const [email,setEmail] = useState("")
+const [username, setUsername] = useState("");
 const [password, setPassword] = useState("");
 const [nameError, setNameError] = useState("");
 const [emailError, setEmailError] = useState("");
 const [usernameError, setUsernameError] = useState("");
 const [passwordError, setPasswordError] = useState("");
 const [loginError, setLoginError] = useState("")
+const [time, setTime]=useState(null)
+
+useEffect(() => {
+  fetch("https://worldtime.timezone.io/api/timezone/Africa/Johannesburg")
+    .then((results) => {
+      if (!results.ok) throw new Error("API Error");
+      return results.json();
+    })
+    .then((timeData) => {
+      setTime(timeData.datetime.slice(0, 16));
+    })
+    .catch(() => setTime("API Error"));
+}, []);
 
 const loginUser =()=>{
   if(validation()===true){
@@ -58,7 +71,9 @@ const login = ()=>{
 
  return(
 <>
+
 <h1>WELCOME</h1>
+<p id="time">{time}</p>
 
 <fieldset>
   <legend>Enter Your details to Login</legend>
@@ -100,7 +115,7 @@ const login = ()=>{
 <p>{passwordError}</p>
 
 <button onClick ={loginUser}>Login</button>
-<p>{loginError}</p>
+<p id="loginMessage">{loginError}</p>
 </fieldset>
 
 
