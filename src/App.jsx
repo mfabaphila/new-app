@@ -12,6 +12,7 @@ const [usernameError, setUsernameError] = useState("");
 const [passwordError, setPasswordError] = useState("");
 const [loginError, setLoginError] = useState("")
 const [time, setTime]=useState(null)
+const [weather, setWeather] = useState(null)
 
 useEffect(() => {
   fetch("https://worldtime.timezone.io/api/timezone/Africa/Johannesburg")
@@ -69,13 +70,25 @@ const login = ()=>{
     }
 }
 
+useEffect(()=>{
+  fetch("https://api.open-meteo.com/v1/forecast?latitude=-33.9258&longitude=18.4232&current=temperature_2m")
+  .then((results)=>results.json())
+  .then((data)=>{
+    setWeather(data.current.temperature_2m + "°C")
+  })
+
+},
+  [])
+
  return(
 <>
 
 <h1>WELCOME</h1>
+<p>{weather}</p>
 <p id="time">{time}</p>
+<div className="login"> 
 
-<fieldset>
+<fieldset className="main">
   <legend>Enter Your details to Login</legend>
 
   <label>Name</label>
@@ -118,8 +131,9 @@ const login = ()=>{
 <p id="loginMessage">{loginError}</p>
 </fieldset>
 
-
+</div>
 </>
+
  )
 
 }
