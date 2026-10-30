@@ -95,7 +95,7 @@ useEffect(()=>{
  return(
 <>
 
-<h1>WELCOME</h1>
+<h1>The Reward Chat</h1>
 <div className="APIs"> 
 <p>{weather}</p>
 <p id="time">{time}</p>
