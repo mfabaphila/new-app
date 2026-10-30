@@ -13,6 +13,8 @@ const [passwordError, setPasswordError] = useState("");
 const [loginError, setLoginError] = useState("")
 const [time, setTime]=useState(null)
 const [weather, setWeather] = useState(null)
+const [exchange, setExchange]= useState(null)
+
 
 useEffect(() => {
   fetch("https://worldtime.timezone.io/api/timezone/Africa/Johannesburg")
@@ -80,12 +82,25 @@ useEffect(()=>{
 },
   [])
 
+  useEffect(()=>{
+    fetch("https://open.er-api.com/v6/latest/USD")
+    .then((results)=>results.json())
+    .then((data)=>{
+      setExchange(data.rates.ZAR.toFixed(2))
+    })
+  },
+    
+    [])
+
  return(
 <>
 
 <h1>WELCOME</h1>
+<div className="APIs"> 
 <p>{weather}</p>
 <p id="time">{time}</p>
+<p style={{color:"brown"}}>R1:{exchange}$</p>
+</div>
 <div className="login"> 
 
 <fieldset className="main">
@@ -130,6 +145,7 @@ useEffect(()=>{
 <button onClick ={loginUser}>Login</button>
 <p id="loginMessage">{loginError}</p>
 </fieldset>
+
 
 </div>
 </>

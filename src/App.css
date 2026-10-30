@@ -92,7 +92,11 @@ button:hover {
 .login{
   
     display: flex;
-    justify-content: center;
-   
+    justify-content: center;  
+}
+.APIs{
+    border: 3px solid red;
+gap: 12PX;
+    width: 200px;
 }
 
