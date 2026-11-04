@@ -2,6 +2,134 @@ import { useState, useEffect } from "react"
 import "./App.css"
 
 export default function App(){
+  const [grade, setGrade] = useState("")
+  const [classRoom, setClassRoom] = useState("");
+const [date, setDate] = useState("");
+const [name, setName] = useState("");
+const [reward, setReward] = useState("");
+const [rewards, setRewards] =useState(
+JSON.parse(localStorage.getItem("rewards"))||[])
+
+
+const addReward = ()=>{
+  if(reward===""){
+    return
+  }
+  const newReward={
+   grade:grade,
+   classRoom:classRoom,
+   date:date,
+   name:name,
+   reward:reward
+
+  }
+  const updatedReward = [...rewards, newReward]
+  setRewards(updatedReward)
+  setReward("")
+  localStorage.setItem("rewards", JSON.stringify(updatedReward))
+}
+
+
+return(
+<>
+<h1 style={{color:"wheat"}}>School Reward Chart</h1>
+
+<label>Grade</label>
+<select value = {grade} onChange ={(e)=>setGrade(e.target.value)}>
+  <option value = "noSelect">Select a grade</option>
+  <option value= "Grade 1">Grade 1</option>
+<option value="Grade 2">Grade 2</option>
+  <option value="Grade 3">Grade 3</option>
+  <option value="Grade 4">Grade 4</option>
+  <option value="Grade 5">Grade 5</option>
+  <option value="Grade 6">Grade 6</option>
+  <option value="Grade 7">Grade 7</option>
+       </select>
+<label>CLASS</label>
+       <select value={classRoom} onChange={(e)=>setClassRoom(e.target.value)}> 
+      
+        <option value = "noSelect">Choose a class</option>
+        <option value ="A">A</option>
+        <option value ="B">B</option>
+<option value ="C">C</option>
+<option value ="D">D</option>
+
+ </select>
+<label>Date of the Reward</label>
+ <input 
+ type = "date"
+ value ={date}
+ placeholder="Pick a date"
+ onChange = {(e)=>setDate(e.target.value)}
+ />
+ <label>Type student Name</label>
+ <input 
+ type = "text"
+ value ={name}
+ placeholder="Type a name"
+ onChange = {(e)=>setName(e.target.value)}
+ />
+
+ <label>Type of Reward</label>
+ <select value ={reward} onChange={(e)=>setReward(e.target.value)}>
+ <option value = "">Choose a Reward</option>
+<option value="Merit">Merit</option>
+<option value="House Points">House Points</option>
+<option value="Free time">Free time</option>
+<option value="Chrome book time">Chrome book time</option>
+</select>
+<button onClick ={addReward}>Add Reward</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>Grade</th>
+       <th>Class</th>
+        <th>Date</th>
+         <th>Name</th>
+          <th>Reward</th>
+    </tr>
+  </thead>
+
+  <tbody>
+{rewards.map((item, index)=>(
+  <tr key ={index}>
+<td>{item.grade}</td>
+ <td>{item.classRoom}</td>
+  <td>{item.date}</td>
+<td>{item.name}</td>
+
+  <td>{item.reward}</td>
+ 
+
+  </tr>
+)
+
+)}
+  </tbody>
+
+
+</table>
+
+</>
+
+
+)
+}
+
+
+
+
+
+
+
+
+
+// ------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
+
+ function LoginPaused(){
 const [name,setName]=useState("")
 const [email,setEmail] = useState("")
 const [username, setUsername] = useState("");
