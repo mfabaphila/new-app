@@ -7,8 +7,54 @@ export default function App(){
 const [date, setDate] = useState("");
 const [name, setName] = useState("");
 const [reward, setReward] = useState("");
+const[gradeError, setGradeError] = useState("")
+const [classRoomError, setClassRoomError] = useState("");
+const [dateError, setDateError] = useState("");
+const [nameError, setNameError] = useState("");
+const [rewardError, setRewardError] = useState("");
 const [rewards, setRewards] =useState(
 JSON.parse(localStorage.getItem("rewards"))||[])
+
+const validateReward =()=>{
+  if(validation()===true){
+    addReward()
+  }
+}
+
+const validation =()=>{
+  setGradeError("");
+  setClassRoomError("");
+  setDateError("");
+  setNameError("");
+  setRewardError("");
+
+  if (grade === "") {
+    setGradeError("Please select a grade")
+    return false
+  }
+
+  if (classRoom === "") {
+    setClassRoomError("Please choose a class")
+    return false
+  }
+
+  if (date === "") {
+    setDateError("Please pick a date")
+    return false
+  }
+
+  if (name === "") {
+    setNameError("Please type a name")
+    return false
+  }
+
+  if (reward === "") {
+    setRewardError("Please choose a reward")
+    return false
+  }
+
+  return true
+}
 
 
 const addReward = ()=>{
@@ -36,7 +82,7 @@ return(
 
 <label>Grade</label>
 <select value = {grade} onChange ={(e)=>setGrade(e.target.value)}>
-  <option value = "noSelect">Select a grade</option>
+  <option value = "">Select a grade</option>
   <option value= "Grade 1">Grade 1</option>
 <option value="Grade 2">Grade 2</option>
   <option value="Grade 3">Grade 3</option>
@@ -44,17 +90,22 @@ return(
   <option value="Grade 5">Grade 5</option>
   <option value="Grade 6">Grade 6</option>
   <option value="Grade 7">Grade 7</option>
+      
        </select>
+
+        <p style={{ color: "red" }}>{gradeError}</p>
 <label>CLASS</label>
        <select value={classRoom} onChange={(e)=>setClassRoom(e.target.value)}> 
       
-        <option value = "noSelect">Choose a class</option>
+        <option value = "">Choose a class</option>
         <option value ="A">A</option>
         <option value ="B">B</option>
 <option value ="C">C</option>
 <option value ="D">D</option>
 
  </select>
+ <p style={{ color: "red" }}>{classRoomError}</p>
+
 <label>Date of the Reward</label>
  <input 
  type = "date"
@@ -62,13 +113,18 @@ return(
  placeholder="Pick a date"
  onChange = {(e)=>setDate(e.target.value)}
  />
+
+ <p style={{ color: "red" }}>{dateError}</p>
+
  <label>Type student Name</label>
  <input 
  type = "text"
  value ={name}
  placeholder="Type a name"
- onChange = {(e)=>setName(e.target.value)}
+ onChange = {(e)=>setName(e.target.value)} cjj
  />
+
+<p style={{ color: "red" }}>{nameError}</p>
 
  <label>Type of Reward</label>
  <select value ={reward} onChange={(e)=>setReward(e.target.value)}>
@@ -78,7 +134,9 @@ return(
 <option value="Free time">Free time</option>
 <option value="Chrome book time">Chrome book time</option>
 </select>
-<button onClick ={addReward}>Add Reward</button>
+
+<p style={{ color: "red" }}>{rewardError}</p>
+<button onClick ={validateReward}>Add Reward</button>
 
 <table>
   <thead>
@@ -116,6 +174,7 @@ return(
 
 )
 }
+
 
 
 

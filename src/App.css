@@ -12,6 +12,16 @@ body{
     background-attachment: fixed;
 
  background-color: whitesmoke;
+ border: 2px solid wheat;
+ max-width: 800px;
+ width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .main{
@@ -31,18 +41,24 @@ margin: 0 auto;
 
 label {
     display: block;
-    width: 100%;
+    width: 50%;
     height: auto;
 }
 
 
 input{
-    height: 35px;
-    width: 80%;
+    height: 25px;
+    width: 50%;
     margin: 5px;
     box-sizing: border-box;
 
+}
 
+select{
+      height: 25px;
+    width: 50%;
+    margin: 5px;
+    box-sizing: border-box;
 }
 label{
     height: 20px;
@@ -100,3 +116,11 @@ gap: 12PX;
     width: 200px;
 }
 
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td{
+    border: 2px solid wheat;
+}
